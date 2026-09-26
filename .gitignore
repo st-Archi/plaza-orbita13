@@ -1,0 +1,23 @@
+# ==== Android / Gradle ====
+**/build/
+**/.gradle/
+*.iml
+.idea/
+android-app/local.properties
+backend/local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# ==== Kotlin / Backend ====
+**/.kotlin/
+*.log
+
+# ==== Archivos de depuración pesados que no deben subirse jamás ====
+*.hprof
+*.hprof.gz
+
+# ==== Sistema operativo ====
+.DS_Store
+Thumbs.db

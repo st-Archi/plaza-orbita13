@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: plaza-orbita-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: DB_URL
+        sync: false      # lo pegas tú en el dashboard (URI de Aiven MySQL)
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true   # Render genera una cadena aleatoria segura sola
+      - key: DDL_AUTO
+        value: update
+      - key: SHOW_SQL
+        value: "false"
