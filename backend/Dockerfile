@@ -1,9 +1,13 @@
-# ---------- Etapa 1: compilar el jar con Gradle ----------
-FROM gradle:8.9-jdk17 AS build
+# ---------- Etapa 1: compilar el jar usando el propio Gradle Wrapper del proyecto ----------
+# Usamos una imagen con solo el JDK (no Gradle preinstalado) y dejamos que ./gradlew
+# descargue automáticamente la versión exacta de Gradle que pide gradle-wrapper.properties
+# (9.3.0 en este proyecto). Así nunca se desincroniza con la versión que necesita el
+# plugin de Spring Boot, aunque más adelante actualices Spring Boot o Gradle.
+FROM eclipse-temurin:17-jdk-jammy AS build
 WORKDIR /app
 COPY . .
-# --no-daemon evita que Gradle deje un proceso residente (no aplica en un build de un solo uso)
-RUN gradle bootJar --no-daemon
+RUN chmod +x ./gradlew
+RUN ./gradlew bootJar --no-daemon
 
 # ---------- Etapa 2: imagen final, solo el jar + JRE ----------
 FROM eclipse-temurin:17-jre-jammy
